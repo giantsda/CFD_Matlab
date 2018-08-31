@@ -1,6 +1,6 @@
 % %% this code reads files, stores datat to sample.mat, read it and plot
 % 
-% folder='C:\CFD_second_HHD\HOOD\08132018\17\data\'
+% folder='E:\desktop\temp\why\'
 % files=dir([folder 'scalar-*.*']);
 % scalar=[];
 % w=1;
@@ -54,9 +54,9 @@
 
 close all;
 clear all;
-load ('C:\CFD_second_HHD\HOOD\08082018\15\data2\scalar.mat')
+load ('C:\CFD_second_HHD\HOOD\08182018\19\data\scalar.mat')
 figure;
-set(gcf,'outerposition',get(0,'screensize'));
+% set(gcf,'outerposition',get(0,'screensize'));
 N=250;
 for e=1:length(scalar)
     if ~isempty(scalar{e})
@@ -64,8 +64,8 @@ for e=1:length(scalar)
         x=scalar{e}(:,2);
         y=scalar{e}(:,4);
         value=scalar{e}(:,5);
-%         [v l]=sort(value);
-%         value(l(end-16:end))=0;
+        [v l]=sort(value);
+        value(l(end-4:end))=0;
         x_mesh=linspace(min(x),max(x),N);
         y_mesh=linspace(min(y),max(y),N);
         [x1,y1]=meshgrid(x_mesh,y_mesh);

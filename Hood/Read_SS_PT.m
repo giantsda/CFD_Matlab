@@ -1,8 +1,9 @@
-filename1 = 'E:\desktop\temp\1.his';
+filename1 = 'E:\desktop\temp\TP.his';
 disp(filename1);
 delimiterIn = '\t'; %read txt file
 headerlinesIn = 13;
 data_m = importdata(filename1,delimiterIn,headerlinesIn);
+disp('read done');
 data=data_m.data;
 data=single(data);
  

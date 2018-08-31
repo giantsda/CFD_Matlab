@@ -1,4 +1,4 @@
-filename1 = 'E:\desktop\temp\export.csv';
+filename1 = 'C:\CFD_second_HHD\HOOD\08142018\18\data\export.csv';
 disp(filename1);
 delimiterIn = ','; %read txt file
 headerlinesIn = 6;

@@ -1,6 +1,6 @@
-% function Plot_VTK_mesh(filename)
+function [vertex face]= Plot_VTK_mesh(filename)
 
-filename='filter_coarse.vtk';
+% filename='wall-filter_0.vtk';
 fid = fopen(filename,'r');
 if( fid==-1 )
     error('Can''t open the file.');
@@ -34,40 +34,37 @@ if((info ~= 'P') && (info ~= 'V'))
     info = sscanf(str,'%c %*s %*s', 1);
 end
 if(info ~= 'P')
-    face_4 = 0;
+    face = 0;
 end
 if(info == 'P')
     [nface]= sscanf(str,'%*s %d %d');
     [A,cnt] = fscanf(fid,'%d', nface(2));
 end
-face_4=zeros(nface(1),5);
+face=zeros(nface(1),5);
 line=1;
-for  i=1:length(face_4)
-    face_4(i,1:A(line)+1)=A(line:line+A(line));
+for  i=1:length(face)
+    face(i,1:A(line)+1)=A(line:line+A(line));
     line=line+A(line)+1;
 end
-face_4=sortrows(face_4,1);
-for i=1:length(face_4)
-    if (face_4(i,1)==4)
-        break;
-    end
-end
-if (i~=1)
-    face_3=face_4(1:i-1,:);
-    face_4(1:i-1,:)=[];
-end
+face=sortrows(face,1);
 
-face_3(:,1)=[];
-face_3(:,end)=[];
-face_3=face_3+1; % VTK is 0 based;
-face_4(:,1)=[];
-face_4=face_4+1; % VTK is 0 based;
+face(:,2:end)=face(:,2:end)+1; %VTK is 0 based
+start=face(1,1);
+last=face(end,1);
+number=zeros(2,last);
+d=find(diff(face(:,1))~=0)+1;
+number(1,start+1:last)=d;
+for i=start:last-1
+    number(2,i)=number(1,i+1)-1;
+end
+number(1,start)=1;
+number(2,last)=length(face);
 fclose(fid);
 
 %% plot
-patch('Faces',face_4,'Vertices',vertex,'FaceColor','none')
-hold on;
-patch('Faces',face_3,'Vertices',vertex,'FaceColor','none')
+for i=start:last
+    patch('Faces',face(number(1,i):number(2,i),2:1+i),'Vertices',vertex,'FaceColor','none')
+end
 view(0,0);
 lighting phong;
 camproj('perspective');
