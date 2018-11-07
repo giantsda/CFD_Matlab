@@ -1,3 +1,4 @@
+
 [vertex face]=Plot_VTK_mesh('filter_cross_section.vtk');
 [a b]=hist (vertex(:,2),100);
 A=[a;b].';
@@ -57,9 +58,10 @@ for e=1:length(particle)
 % % pause( 0);    
 end
    
-scatter3(pos(:,3),pos(:,4),pos(:,5),100,'.');
+scatter3(pos(:,3),pos(:,4),pos(:,5),200,'.');
 hold on;
 view(-180,-0);
 xlabel('x');
 ylabel('y');
 zlabel('z');
+set(gcf,'color','w');

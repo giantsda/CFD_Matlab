@@ -61,17 +61,30 @@ number(1,start)=1;
 number(2,last)=length(face);
 fclose(fid);
 
-%% plot
+% %% plot
+% for i=start:last
+%     patch('Faces',face(number(1,i):number(2,i),2:1+i),'Vertices',vertex,'FaceColor','none')
+% end
+% view(0,0);
+% lighting phong;
+% camproj('perspective');
+% axis square;
+% axis tight;
+% axis equal;
+% camlight;
+
+
 for i=start:last
-    patch('Faces',face(number(1,i):number(2,i),2:1+i),'Vertices',vertex,'FaceColor','none')
+    h=patch('Faces',face(number(1,i):number(2,i),2:1+i),'Vertices',vertex,'FaceColor','none','EdgeColor','b');
+    alpha(0.22)
+    light
+    h.FaceLighting = 'gouraud';
+    hold on;
 end
-view(0,0);
-lighting phong;
+lighting gouraud;
+view(180,-44);
 camproj('perspective');
 axis square;
 axis tight;
 axis equal;
-camlight;
-
-
-
+ 

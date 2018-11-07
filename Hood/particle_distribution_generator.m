@@ -5,7 +5,7 @@ v=(exp(sigma*sigma)-1)*m*m;
 mu = log((m^2)/sqrt(v+m^2));
 sigma = sqrt(log(v/(m^2)+1));
 
-X = lognrnd(mu,sigma,1,200000000);
+X = lognrnd(mu,sigma,1,20000);
 
 % while(1)
 %     X = lognrnd(mu,sigma,1,20000);

@@ -1,5 +1,5 @@
 folder_path='E:\desktop\CFD\Raceway_pond_and_Peers_PBR_03132016--\10212016\29' ;
-file_name='61_6000';
+file_name='export_good';
 data=[];
 % rename_file (folder_path, file_name,11);
 for haha=1:2

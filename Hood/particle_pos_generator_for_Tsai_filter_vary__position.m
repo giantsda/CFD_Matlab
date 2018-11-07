@@ -115,7 +115,7 @@ for i=3:1:siz
 end
 %% generate writeinfo
 numberpart=zeros(ddd+1,12);
-d=9e-6; %8e-5;
+d=0.5e-6; %8e-5;
 mass=4/3*pi*(d/2)^3*1000; % calculate the mass
 numberpart(:,7)=d ;%8e-5;  %define the diameter
 numberpart(:,8)=300; %define Temperature

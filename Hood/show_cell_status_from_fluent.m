@@ -1,5 +1,5 @@
-% %% this code reads files, stores datat to sample.mat, read it and plot
-% 
+%% this code reads files, stores datat to sample.mat, read it and plot
+
 % folder='E:\desktop\temp\why\'
 % files=dir([folder 'scalar-*.*']);
 % scalar=[];
@@ -54,9 +54,9 @@
 
 close all;
 clear all;
-load ('C:\CFD_second_HHD\HOOD\08182018\19\data\scalar.mat')
+load ('C:\CFD_second_HHD\HOOD\08142018\18\data2\scalar.mat')
 figure;
-% set(gcf,'outerposition',get(0,'screensize'));
+set(gcf,'outerposition',get(0,'screensize'));
 N=250;
 for e=1:length(scalar)
     if ~isempty(scalar{e})
@@ -79,6 +79,9 @@ for e=1:length(scalar)
         colormap jet;
         colorbar;
         title(filename_store{e})
+        axis off;
+        axis equal
+        set(gcf,'color','w');
         pause(0)
     end
 end

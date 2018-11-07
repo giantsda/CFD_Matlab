@@ -1,4 +1,4 @@
-filename1 = 'E:\desktop\temp\TP.his';
+filename1 = 'C:\CFD_second_HHD\HOOD\08302018\22\PT_9e-6.his';
 disp(filename1);
 delimiterIn = '\t'; %read txt file
 headerlinesIn = 13;
@@ -42,7 +42,7 @@ for a=1:1:number  %for ath partocle
     c=c+repeat(a);
 end
 disp('writting all data to particle.............. \n');
-clearvars -except particle number folder_path
+% clearvars -except particle number folder_path
  
 
 
