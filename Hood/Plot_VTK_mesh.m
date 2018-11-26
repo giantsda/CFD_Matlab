@@ -75,7 +75,8 @@ fclose(fid);
 
 
 for i=start:last
-    h=patch('Faces',face(number(1,i):number(2,i),2:1+i),'Vertices',vertex,'FaceColor','none','EdgeColor','b');
+%     h=patch('Faces',face(number(1,i):number(2,i),2:1+i),'Vertices',vertex,'FaceColor','none','EdgeColor','b');
+    h=patch('Faces',face(number(1,i):number(2,i),2:1+i),'Vertices',vertex,'FaceColor','blue','EdgeColor','none');
     alpha(0.22)
     light
     h.FaceLighting = 'gouraud';
