@@ -1,0 +1,100 @@
+clc
+% % % % x_small_sita=[26.21;7.408*10^8;6.825*10^8;1.374*10^8;0.25;5.37;53086;316.25;1683.7;0.1326];  
+x_small_sita=[26.21;6.708*10^5;6.85*10^5;1.3*10^5;0.25;5.37;52;339.25;1800.7;0.122];  
+xx=[];
+fvall=[];
+ress=[];
+x0=x_small_sita;
+for sitax=2.6:0.05:100
+[x,fval]=fsolve(@combined_ca_den,x0,[],sitax);
+BOD_l1=x(1);
+if sitax>=68.5 && sitax<=70.5
+    continue
+end
+x0=0.95*x;
+x_temp=[sitax; x];
+xx=[xx x_temp];
+fvall=[fvall fval];
+               [resu]=nitrification(sitax,BOD_l1);
+                ress=[ress resu];
+end
+%
+sitax=xx(1,:);
+BOD_l1=xx(2,:);
+dXdt_aer=xx(3,:);
+dXdt_den=xx(4,:);
+dXdt_nit=xx(5,:);
+R1=xx(6,:);
+R2=xx(7,:);
+Qw=xx(8,:);
+Xa=xx(9,:);
+Xi=xx(10,:);
+S=xx(11,:);
+%%
+subplot(3,3,1);
+plot(sitax,BOD_l1);
+title('sitax,BOD\_l1');
+subplot(3,3,2);
+plot(sitax,dXdt_aer);
+title('sitax,dXdt\_aer');
+subplot(3,3,3);
+plot(sitax,dXdt_den);
+title('sitax,dXdt\_den');
+subplot(3,3,4);
+plot(sitax,dXdt_nit);
+title('sitax,dXdt\_nit');
+subplot(3,3,5);
+plot(sitax,R1);
+title('sitax,R1');
+subplot(3,3,6);
+plot(sitax,R2);
+title('sitax,R2');
+subplot(3,3,7);
+plot(sitax,Qw);
+title('sitax,Qw');
+subplot(3,3,8);
+plot(sitax,Xa+Xi);
+title('sitax,Xv');
+subplot(3,3,9);
+plot(sitax,S);
+title('sitax,S');
+%%
+figure
+sitax=ress(1,:);
+S_C=ress(2,:);
+S_NH4=ress(3,:);
+S_NO2=ress(4,:);
+dXvdt_C=ress(5,:);
+dXvdt_NH3=ress(6,:);
+dXvdt_NO2=ress(7,:);
+dXvdt_total=ress(8,:);
+O2_requirement=ress(9,:);
+R=ress(10,:);
+%%%%%%%%%%%%%%%%%%%%% 
+subplot(3,3,1);
+plot(sitax,S_C);
+title('sitax,S\_C');
+subplot(3,3,2);
+plot(sitax,S_NH4);
+title('sitax,S\_NH4');
+subplot(3,3,3);
+plot(sitax,S_NO2);
+title('sitax,S\_NO2');
+subplot(3,3,4);
+plot(sitax,dXvdt_C);
+title('sitax,dXvdt\_C');
+subplot(3,3,5);
+plot(sitax,dXvdt_NH3);
+title('sitax,dXvdt\_NH3');
+subplot(3,3,6);
+plot(sitax,dXvdt_NO2);
+title('sitax,dXvdt\_NO2');
+subplot(3,3,7);
+plot(sitax,dXvdt_total);
+title('sitax,dXvdt\_total');
+subplot(3,3,8);
+plot(sitax,O2_requirement);
+title('sitax,O2\_requirement');
+subplot(3,3,9);
+plot(sitax,R);
+title('sitax,R');

@@ -1,0 +1,23 @@
+function f=carbon_oxidation(x,sitax,BOD_l1)
+    Xvr=10000;
+V=1.7/2*1000000*0.00378541;  %m3
+Q= 11/2*1000000*0.00378541;  %m3/d
+    sita=V/Q;
+    S0=BOD_l1;
+    Xi0=20;
+    q=20;
+    K=5;
+    Y=0.45;
+    b=0.15;
+    fd=0.8;
+    T=323; 
+Qw=x(1);
+Xa=x(2);
+Xi=x(3);
+S=x(4);
+f(1)=V*(Xi+Xa)-Qw*Xvr*sitax;  
+f(2)=sitax*Y*(S0-S)/(1+b*sitax)-sita*Xa;                                                                                                                                                     
+f(3)= sitax*(Xi0+Xa*(1-fd)*b*sita)-sita*Xi;  
+f(4)=K*(1+b*sitax)-(sitax*(Y*q-b)-1)*S;
+f=[f(1);f(2);f(3);f(4)];
+% end
