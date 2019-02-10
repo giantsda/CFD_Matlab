@@ -1,9 +1,10 @@
-figure;
-set(gcf,'outerposition',get(0,'screensize'));
+% figure;
+% set(gcf,'outerposition',get(0,'screensize'));
 critical_distance=10;
 time_interval=[];
+surface=24;
 pksnum=[];
-for e=1:1:number
+for e=1:1:1000
     e
 length_particle=length(particle{e});
     if length_particle ~=0
@@ -17,7 +18,7 @@ length_particle=length(particle{e});
     zp=100*particle{e}(:,5);
     yp=double(yp);
     MinPeakProminence=4;
-    [pks,locs]=findpeaks(yp,'MinPeakProminence',MinPeakProminence,'MinPeakHeight',20);
+    [pks,locs]=findpeaks(yp,'MinPeakProminence',8,'MinPeakHeight',22);
     pksnum_i=length(pks);
     pksnum=[pksnum pksnum_i];
     pks_ave=mean(pksnum);
@@ -25,12 +26,9 @@ length_particle=length(particle{e});
     hold on;
     plot(time(locs),yp(locs),'o')
      hold off;
-% time_interval=[time_interval;haha];
     end
     pause( )
 end
-pksnum=pksnum/106*60*10;
-hist(pksnum,30);
-mean(pksnum)
-
-
+% pksnum=pksnum/106*60;
+106/mean(pksnum)
+ 

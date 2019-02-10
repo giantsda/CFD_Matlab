@@ -1,0 +1,25 @@
+LBig=787*0.3048; % m
+rOutBig=31*0.3048;% m
+rMidBig=rOutBig/2;% m
+racewayLengthBig=LBig*2+2*pi*rMidBig;  
+timeBig=30*60; %s
+velocityBig=racewayLengthBig/timeBig %m/s
+densityWater=1000; % kg/m3
+viscosityWater=8.90e-4; %Pa. s
+a=28*0.3048;
+b=12*0.0254;
+LengthScaleBig=4*a*b/(a+2*b);
+ReBig=densityWater*velocityBig*LengthScaleBig/viscosityWater
+
+LSmall=2;%m;
+rOutSmall=0.56;%m;
+rMidSmall=rOutSmall/2; %m
+racewayLengthSmall=LSmall*2+2*pi*rMidSmall;
+timeSmall=19; %s
+velocitySmall=racewayLengthSmall/timeSmall;
+densityWater=1000; % kg/m3
+viscosityWater=8.90e-4; %Pa. s
+a=0.54;
+b=0.2;
+LengthScaleSmall=4*a*b/(a+2*b);
+ReSmall=densityWater*velocitySmall*LengthScaleSmall/viscosityWater

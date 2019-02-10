@@ -13,7 +13,7 @@ function pivFigGenerator(movieFile,path,frameI,frameInterval)
 function I=pivFig(movieFile,path,frameI)
 mov=VideoReader(movieFile);
 frame = read(mov,frameI);
-frame=frame(16:1062,25:1355,:);
+frame=frame(369:1063,493:1293,:);
 % imwrite(frame,[path 'color_'  num2str(frameI,'%0.5d')  '.png']);
 I = rgb2gray(frame);
 

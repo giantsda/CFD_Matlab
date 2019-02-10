@@ -11,7 +11,7 @@ for i=1:length(files)
     end
 end
 fprintf('Checked: file A-B pattern OK. \n');
-fprintf('Removing filer. \n');
+fprintf('Removing filer..... \n');
 
 %%
 parfor_progress(length(files)); % Set the total number of iterations
