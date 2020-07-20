@@ -1,10 +1,10 @@
-folder_path='E:\desktop\CFD\Raceway_pond_and_Peers_PBR_03132016--\10212016\29' ;
-file_name='export_good';
+folder_path='C:\CFD_second_HHD\racewayOpenfoam\07062019\82\PT' ;
+file_name='export1';
 data=[];
 % rename_file (folder_path, file_name,11);
-for haha=1:2
+for haha=1:26
 %    filename1= [folder_path '\' file_name '.csv'] ;
-filename1 = [folder_path '\' file_name '_' num2str(haha) '.csv'] ;
+filename1 = [folder_path '\' file_name '.csv.' num2str(haha,'%3.3d') ] ;
 disp(filename1);
 delimiterIn = ','; %read txt file
     if haha==1
@@ -55,7 +55,5 @@ for a=1:1:number  %for ath partocle
 end
 disp('writting all data to particle.............. \n');
 clearvars -except particle number folder_path
-save([folder_path '\particle.mat'], '-v7.3');
+save([folder_path '\particle1.mat'], '-v7.3');
 disp('store all data to particle.............. \n');
-
-

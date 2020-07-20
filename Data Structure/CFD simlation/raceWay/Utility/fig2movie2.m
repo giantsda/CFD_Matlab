@@ -1,13 +1,13 @@
-path='E:\desktop\temp\re\63\';
+path='E:\desktop\temp\New folder\';
 frame_files = dir([ path '\*.png']);
 %% this file combine figs to generate a Movie by writeVideo
-v = VideoWriter('E:\desktop\temp\63Velocity.mp4','MPEG-4');
+v = VideoWriter('E:\desktop\temp\89spiral.mp4','MPEG-4');
 v.FrameRate=8;
 v.Quality = 75;
 open(v)
 begin=1;
 middle=1;
-endd=10;
+% endd=10;
 i=1;
 for i=begin:middle:length(frame_files)
     file_name = [path '\' frame_files(i).name];
@@ -15,7 +15,7 @@ for i=begin:middle:length(frame_files)
     frame=imread( file_name);
 %     frame=imresize(frame,[1088 1920]);
     writeVideo(v, frame);
-    i
+    fprintf('%0.2f %%\n',i/length(frame_files)*100);
 end
 close(v)
 

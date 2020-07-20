@@ -8,7 +8,8 @@ Caliration=[0.00100051078850230	0.0301863015082328;
     0.00100217629084751	0.0534231690709292;
     0.001025496455292  0.018356439161767;
     ];
-path='E:\desktop\temp\racewayMeasurements\RPM=13.6\Calibration7\New folder\';
+
+path='E:\desktop\temp\racewayMeasurements\RPM=13.6\Calibration7\';
 C=Caliration(7,:);
 files=dir([path 'Region=2*']);
 x=-85;

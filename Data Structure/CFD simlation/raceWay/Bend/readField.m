@@ -1,3 +1,5 @@
+%% this program read velocity field and store it as profile.
+
 % path='C:\CFD_second_HHD\racewayOpenfoam\05102019\65\profiles\';
 % files=dir([ path 'profile-*']);
 % 

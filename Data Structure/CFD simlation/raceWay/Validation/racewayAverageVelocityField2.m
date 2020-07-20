@@ -1,4 +1,4 @@
-path='C:\CFD_second_HHD\racewayOpenfoam\04232019\27\data\';
+path='C:\CFD_second_HHD\racewayOpenfoam\06102019\79\79Validation\';
 filesTotal=dir([path 'export*']);
 y_mesh=53.68-[5 10 15 20 25 30 35 40 45 48];  %% 53.68and 155
 y_mesh=y_mesh/100;
@@ -15,7 +15,7 @@ z_mesh=linspace(2,17,11)/100;
 value_s=y1*0;
 
 files=[];  % too much data, read every 15
-for i=1:10:length(filesTotal)
+for i=1:1:892
     files=[files filesTotal(i)];
 end
 
@@ -50,7 +50,7 @@ figure;
 pcolor(y1,z1,meanVelocity)
 shading interp;
 axis equal
-colormap jet
+colormap parula
 colorbar
 hold on;
 scatter(reshape(y1,1,[]),reshape(z1,1,[]),'*')
