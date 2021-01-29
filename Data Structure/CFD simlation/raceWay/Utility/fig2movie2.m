@@ -1,9 +1,9 @@
-path='E:\desktop\temp\New folder\';
-frame_files = dir([ path '\*.png']);
+path='/home/chen/Desktop/minipond';
+frame_files = dir([ path '/*.png']);
 %% this file combine figs to generate a Movie by writeVideo
-v = VideoWriter('E:\desktop\temp\89spiral.mp4','MPEG-4');
+v = VideoWriter('/home/chen/Desktop/minipond/mini.mp4','MPEG-4');
 v.FrameRate=8;
-v.Quality = 75;
+% v.Quality = 75;
 open(v)
 begin=1;
 middle=1;

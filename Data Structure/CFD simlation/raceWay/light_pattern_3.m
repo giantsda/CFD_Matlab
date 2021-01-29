@@ -8,12 +8,12 @@ interval=zeros(1,2000000);
 i=1;
 for e=1:number
     e
-    y_pos=particle{e}(:,4)*100;
+    y_pos=particle{e}(:,5);
     y_pos=max(y_pos)-y_pos;
     time=particle{e}(:,1);
     
-    light_history=10.^(log10(2000)-a.*y_pos);
-    light_history=double(light_history);
+    light_history=1./exp(40*(y_pos)) *2000;
+ 
     time=double(time);
     
     [pks,locs] = findpeaks(light_history,'MinPeakHeight',1000,'MinPeakProminence',200);
@@ -28,7 +28,7 @@ for e=1:number
 %     set(t2,'FontSize',32);
 %     hold off ;
     
-    peak_time =time(locs)    ;
+    peak_time =time(locs);
     peak_time_interval=diff(peak_time);
     interval(i:i+length(peak_time_interval)-1)=peak_time_interval;
     i=i+length(peak_time_interval);
@@ -58,7 +58,7 @@ end
 
  
 
-[counts,centers] = hist(interval,498);
+[counts,centers] = hist(interval,496);
 counts=counts/max(counts);
 bar(centers,counts);
 t2=xlabel('time of light peak interval (seconds)')

@@ -5,16 +5,16 @@ close all;
 threholdLow=0.00025;
 threholdHigh=0.0014;
 
-% data=[];
-% for i=1:length(files)
-%     filename=files(i).name;
-%     delimiterIn = ','; %read txt file
-%     headerlinesIn=11;
-%     fprintf('reading %s \n',[path filename]);
-%     tmp= importdata([path filename],delimiterIn,headerlinesIn);
-%     data(i).data=tmp.data;
-%     data(i).filename=filename;
-% end
+data=[];
+for i=1:length(files)
+    filename=files(i).name;
+    delimiterIn = ','; %read txt file
+    headerlinesIn=11;
+    fprintf('reading %s \n',[path filename]);
+    tmp= importdata([path filename],delimiterIn,headerlinesIn);
+    data(i).data=tmp.data;
+    data(i).filename=filename;
+end
 
 %% plot
 % format: cellnumber,    x,    y,    z,        w-nahco3,           w-vof

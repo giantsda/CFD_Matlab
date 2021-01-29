@@ -1,4 +1,4 @@
-folder_path='C:\CFD_second_HHD\racewayOpenfoam\07062019\82\PT' ;
+folder_path='D:\CFD_second_HHD\PT29' ;
 file_name='export1';
 data=[];
 % rename_file (folder_path, file_name,11);

@@ -26,6 +26,9 @@ for e=1:1:N
         %         n2=500;
         %         plot3(zp(1+n2:n+n2), xp(1+n2:n+n2),yp(1+n2:n+n2),'LineWidth',0.5);
         plot3(zp,xp,yp,'LineWidth',0.5)
+%         vel=abs([diff(zp) diff(xp) diff(yp)]);
+%         vel(:,4)= (vel(:,1).^2+vel(:,2).^2+vel(:,3).^2).^(1/3);
+%         scatter3 (zp,xp,yp,1,[0;vel(:,4)]);
         hold on;
         t1=  xlabel('Width (cm)');
         t2=ylabel('Length (cm)');

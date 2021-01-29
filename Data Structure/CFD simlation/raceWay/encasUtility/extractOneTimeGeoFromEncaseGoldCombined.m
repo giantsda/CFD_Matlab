@@ -1,6 +1,6 @@
 %% this file uses ensightGold combined Geo file and extract the first time step geometry from it
 %% for plotting or making video, I will still need all geos since rotate rotating
-path='D:\CFD_second_HHD\06082020\146\data3\';
+path='D:\CFD_second_HHD\06082020\147\data\data\';
 filename1='146.geo';
 filename2='oneTime.geo';
 
