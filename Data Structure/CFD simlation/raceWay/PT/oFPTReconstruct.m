@@ -1,18 +1,22 @@
-path='/home/chen/Desktop/project/171/3';
+path='/home/chen/Desktop/project/172/3';
 minTime=153;
 MaxTime=inf;
 numFolders=strings();
 folders=dir([path '/*']);
 folders={folders.name};
-j=1
+j=1;
+
 for i=1:length(folders)
     if ~isempty(str2num(folders{i}))
         if str2num(folders{i})>=minTime && str2num(folders{i})<MaxTime
             numFolders(j)=folders{i};
+            FolderTime(j)=str2num(folders{i});
             j=j+1;
         end
     end
 end
+[~,I] = sort(FolderTime); 
+numFolders=numFolders(I); %% sort by time or 1000s is before 255s etc.
 
 %% reading files
 A=cell(1,length(numFolders));

@@ -1,11 +1,12 @@
 % %% This file reads infomaton of particles to plot all the pathlines
 
 % load ('C:\CFD_second_HHD\racewayOpenfoam\07272019\82\PT\particle1')
+number= length(particle);
 figure;
 set(gcf,'outerposition',get(0,'screensize'));
 % clear M;
 i=1;
-N=30;
+N=100;
 for e=1:1:N
          e
     e=randi([1 number]);
@@ -25,7 +26,7 @@ for e=1:1:N
         %         n=5710;
         %         n2=500;
         %         plot3(zp(1+n2:n+n2), xp(1+n2:n+n2),yp(1+n2:n+n2),'LineWidth',0.5);
-        plot3(zp,xp,yp,'LineWidth',0.5)
+        plot3(xp,yp,zp,'LineWidth',0.5)
 %         vel=abs([diff(zp) diff(xp) diff(yp)]);
 %         vel(:,4)= (vel(:,1).^2+vel(:,2).^2+vel(:,3).^2).^(1/3);
 %         scatter3 (zp,xp,yp,1,[0;vel(:,4)]);
