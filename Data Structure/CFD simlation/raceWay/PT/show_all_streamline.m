@@ -6,7 +6,7 @@ figure;
 set(gcf,'outerposition',get(0,'screensize'));
 % clear M;
 i=1;
-N=100;
+N=1000;
 for e=1:1:N
          e
     e=randi([1 number]);

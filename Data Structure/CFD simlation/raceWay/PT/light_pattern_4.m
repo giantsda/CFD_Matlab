@@ -1,8 +1,8 @@
 %% Very kike light_pattern_3, it calculates the distribution of light duration and
 %% light intervals for each particle so that we can confirm that after a long time
 %% of particle tracking the particles trajectoreies show a very similar pattern.
-% clear all;
-% load ('/home/chen/Desktop/project/172/1/particle.mat')
+clear all;
+load ('D:\CFD_second_HHD\01272021\172\1\particle.mat')
 number=length(particle);
 timeStepSize=0.2; % seconds
 intervalS=cell(1,number);

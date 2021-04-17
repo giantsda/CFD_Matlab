@@ -106,6 +106,7 @@ for c=1:1
  
     for n=1:length(UcriticalArray)
         Ucritical=UcriticalArray(n);
+        Ucritical
         Data.count=zeros(length(Data.vof),1);
         for i=1:N
             Data.count=Data.count+double(Data.U{i}>Ucritical);
@@ -172,7 +173,7 @@ for c=1:1
             end
         end
         
-        [Boun,L,N] = bwboundaries(D);
+        [Boun,L,n,A] = bwboundaries(D);
         stats=  regionprops(L, 'Centroid', 'Area', 'Perimeter');
         Area = cat(1,stats.Area);
         Centroid = cat(1, stats.Centroid);
@@ -185,8 +186,8 @@ for c=1:1
         plot(Boun{n}(:,1), size(D,2)-Boun{n}(:,2)+1, 'r', 'LineWidth', 1)
         hold off;
         title(['criticalDistance=' num2str(criticalDistance(n))]);
-        saveas(gcf,['../criticalDistance-' num2str(c) '.png']);
-        fprintf(fid1,"criticaldistance=%f\n----------------------\n",criticalDistance);
+%         saveas(gcf,['../criticalDistance-' num2str(c) '.png']);
+%         fprintf(fid1,"criticaldistance=%f\n----------------------\n",criticalDistance);
     end
     figure;
     plot(UcriticalArray,criticalDistance,'-*');
