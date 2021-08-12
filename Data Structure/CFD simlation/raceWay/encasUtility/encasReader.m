@@ -1,5 +1,5 @@
 % clear all;
-path='D:\CFD_second_HHD\06082020\146\data3\';
+path='D:\CFD_second_HHD\06102019\78\timeAccumulated\';
 
 %% Read binary geometry
 geofile='oneTime.geo';
@@ -24,8 +24,8 @@ fprintf('\n');
 %  N =[  436132     2656239      129220       36180       56995       10241       17160]
 
 %% read file combined BINARY
-filename='146.scl8';
-baseName='146.case';
+filename='binary.scl5';
+baseName='binary.case';
 fid = fopen([path baseName]);
 while ~feof(fid)
     s=fgetl(fid);
@@ -42,8 +42,8 @@ for t=1:timeStep
     fprintf('reading %s timeStep: %d of %d ...        ',filename,t,timeStep);
     e=1;
     for i=1:length(N)
-        Data{t}(e:e+N(i)-1, 3)= fread(fid,N(i),'*single');
 %         Data{t}(e:e+N(i)-1, 2)= fread(fid,N(i),'*single');
+        Data{t}(e:e+N(i)-1, 1)= fread(fid,N(i),'*single');
         e=e+N(i);
         if i~=length(N)
             fread(fid,82,'uint16');% fixed length dividerw

@@ -1,20 +1,27 @@
-path='C:\CFD_second_HHD\racewayOpenfoam\06102019\78\timeAccumulated\';
-index=[];
-threshold=0.1;
-for i=1:size(Data,1)
-    index{i,1}=Data{i,1}*0;
-end
-
-for j=1:size(Data,2)-1
-    for i=1:size(Data,1)
-        haha=abs(Data{i,j});%>threshold;
-        index{i}= index{i}+single(haha);
-%         index{i}= index{i}+Data{i,1};
-    end
-end
+path='D:\CFD_second_HHD\06102019\78\timeAccumulated\';
+% index=[];
+% threshold=0.1;
+% index=zeros(length(Data{1}),1);
+% for i=1:length(Data)
+%     vof=Data{i}(:,2);
+%     magU=Data{i}(:,3);
+%     air=find(vof<0.5);
+%     magU(air)=0;
+% %     uZ=abs(uZ);
+%     index=index+(magU<0.1);
+% end
   
+ 
+
+block=[];
+block(1,1)=1;
+block(1,2)=1+N(1)-1;
+for i=2:length(N)
+    block(i,1)= block(i-1,2)+1;
+    block(i,2)= block(i,1)+N(i)-1;    
+end
 filename1='binary.scl1';
-filename2='binary.scl11';
+filename2='binary.scl10';
 fid1=fopen([path filename1]);
 fid2=fopen([path filename2],'w');
 
@@ -22,13 +29,13 @@ fid2=fopen([path filename2],'w');
 fprintf('writing %s       ',filename2);
 A=fread(fid1,80*2,'uint8');% fixed length head
 fwrite(fid2,A);
-for block=1:length(index)
+for i=1:length(block)
     fwrite(fid2,fread(fid1,82*2,'uint8'));
-    fread(fid1,length(index{block}),'*single');
-    fwrite(fid2,index{block},'single');
+    fread(fid1,N(i),'*single');
+    fwrite(fid2,index(block(i,1):block(i,2)),'single');
 %     break;
 end
- fwrite(fid2,fread(fid1,40*2,'uint8'));
+fwrite(fid2,fread(fid1,40*2,'uint8'));
 fclose(fid1);
 fclose(fid2);
 fprintf('Done.\n',filename2);

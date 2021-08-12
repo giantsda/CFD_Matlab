@@ -4,17 +4,16 @@
 figure;
 set(gcf,'outerposition',get(0,'screensize'));
 
-MainPath='D:\CFD_second_HHD\02212020\130';
+MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 results={};
 
-for i=1:62
+for i=9:16
     caseN=i
     Data={};
     cd (MainPath);
-    cd (num2str(i));
-    %     fprintf(fid,"Case %s: ",num2str(i));
-    load('Data.mat');
+ 
+    load(['Data_' num2str(caseN) '.mat']);
     radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
     leftPoint=min(Data.mesh(:,1));
     fprintf("Done with reading data.\n");

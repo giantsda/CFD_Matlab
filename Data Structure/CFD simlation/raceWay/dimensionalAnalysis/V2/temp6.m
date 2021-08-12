@@ -57,7 +57,7 @@ AR=AR(results.Index);
 Dh=Dh(results.Index);
 A=A(results.Index);
 
-plot(UCritical3./De)
+plot(UCritical3./U./De)
 
 % 
 % plot(UCritical3(1:8));

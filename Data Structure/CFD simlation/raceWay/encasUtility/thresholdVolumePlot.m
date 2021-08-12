@@ -13,7 +13,7 @@ for j=1:size(Data,2)
         data=Data{i,j};
         lengthI=length(data);
         water=data(find(data(:,2)>0.9),:);
-        highVZ(j)=highVZ(j)+length(find(abs(water(:,1))<threshold));
+        highVZ(j)=highVZ(j)+length(find(abs(water(:,3))<threshold));
         totalV(j)=totalV(j)+length(water);
     end
 end
@@ -22,5 +22,9 @@ plot(linspace(1.00218e+02,1.72218e+02,481),highVZ./totalV,'k*-')
 title('volume percentage of abs(Vz)>0.1')
 xlabel('flow time (s)');
 ylabel('%');
+hold on;
 
-
+time=linspace(1.00218e+02,1.72218e+02,481);
+% highUz=highVZ./totalV;
+lowMagU=highVZ./totalV;
+M=[time.' highUz.' lowMagU.'];

@@ -3,9 +3,10 @@
 %in the box that is defined as a rectangle of radius and 2*radius.
 
 MainPath='D:\CFD_second_HHD\02212020\130';
+% MainPath='/scratch/chenshen/chenshen/project/';
 cd (MainPath);
 
-for i= [13]
+for i= [10:62]
     caseN=i
     Data={};
     cd (MainPath);
@@ -92,10 +93,10 @@ for i= [13]
     end
     
     i=find(Data.mesh(:,3)>0.18); % remove the nodes that is adjcent to air. Data here will have close to 1 vof but huge velocity.
-    if ismember(i,[9:16,57])
+    if ismember(caseN,[9:16,57])
         i=find(Data.mesh(:,3)>0.15); % remove the nodes that is adjcent to air. Data here will have close to 1 vof but huge velocity.
     end
-    if ismember(i,[17:24,58])
+    if ismember(caseN,[17:24,58])
         i=find(Data.mesh(:,3)>0.24); % remove the nodes that is adjcent to air. Data here will have close to 1 vof but huge velocity.
     end
     Data.mesh(i,:)=[];
@@ -107,6 +108,6 @@ for i= [13]
     
     fprintf("Done with reading data for case %d.\n",caseN);
     
-    save([MainPath '/' num2str(caseN) '/Data.mat'],'Data', '-v7.3');
+    save([MainPath '/Data/Data_' num2str(caseN) '.mat'],'Data', '-v7.3');
     disp('store UcriticalStore to MainPath.............. \n');
 end

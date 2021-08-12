@@ -22,6 +22,6 @@ results.meanMagU=results.meanMagU(results.Index);
 results.meanUx=results.meanUx(results.Index);
  
 
-clearvars -except results MainPath
-save([MainPath '/results15S.mat'], '-v7.3');
-fprintf('store UcriticalStore to MainPath.............. \n'); 
+% clearvars -except results MainPath
+% save([MainPath '/results15S.mat'], '-v7.3');
+% fprintf('store UcriticalStore to MainPath.............. \n'); 

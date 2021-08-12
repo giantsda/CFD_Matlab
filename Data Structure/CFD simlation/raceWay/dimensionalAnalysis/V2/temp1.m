@@ -1,59 +1,30 @@
-%The length of the straight channel does not significantly change the critical velocity,
-%thus the critical vertical velocity is redefined as the 20 percent of the vertical velocity
-%in the box that is defined as a rectangle of radius and 2*radius.
+close all;
+figure;
+set(gcf,'outerposition',get(0,'screensize'));
 
-MainPath='D:\CFD_second_HHD\02212020\130';
+MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
-% fid=fopen('130UcriticalResultsV2.txt','a');
-UcriticalStore={};
-for i=[1:62]
-    caseN=i
-    Data={};
-    cd (MainPath);
-    cd (num2str(i));
-    %     fprintf(fid,"Case %s: ",num2str(i));
-    load('Data.mat');
-    %% Find the examine box.
-    radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
-    leftPoint=min(Data.mesh(:,1));
-    box=find(Data.mesh(:,1)<leftPoint+2*radius & Data.mesh(:,1)>leftPoint+1*radius);
-    Data.mesh=Data.mesh(box,:);
-    Data.vof=Data.vof(box,:);
-    for n=1:length(Data.U)
-        Data.U{n}=Data.U{n}(box,3);
-    end
-    fprintf("Done with reading data.\n");
-    
-    Us=abs(vertcat(Data.U{:}));
-    Us=sort(Us);
-    UcriticalStore{caseN}.percent2=Us(floor(length(Us)*(1-0.02)));
-    UcriticalStore{caseN}.percent3=Us(floor(length(Us)*(1-0.03)));
-    UcriticalStore{caseN}.percent4=Us(floor(length(Us)*(1-0.04)));
-    UcriticalStore{caseN}.percent5=Us(floor(length(Us)*(1-0.05)));
-    UcriticalStore{caseN}.percent6=Us(floor(length(Us)*(1-0.06)));
-    
-%         scatter3(Data.mesh(:,1),Data.mesh(:,2),Data.mesh(:,3),2,'b','filled')
-%         axis equal;
-%         view(0,90);
-    
-    %     tol=1e-6;
-    %     Solution = bisection(@getP,0,1,tol,Data,UcriticalPercentage)
-    %     fprintf(fid,"Ucritical=%2.5f\n----------------------------\n",Solution);
-    
-end
+caseN=32;
+load(['Data_' num2str(caseN) '.mat']);
+Ucritical=0.399902344
 
-% clearvars -except UcriticalStore MainPath
-% save([MainPath '/UcriticalStore.mat'], '-v7.3');
-% disp('store UcriticalStore to MainPath.............. \n');
 
-for i=1:length(UcriticalStore)
-    if ~isempty(UcriticalStore{i})
-    a(i)=UcriticalStore{i}.percent3;
+ for timeIndex=1:length(Data.U)
+    index=zeros(size(Data.vof));
+    for j=1:timeIndex
+        index(abs(Data.U{j}(:,3))>Ucritical)=1;
     end
-end
-% a(40:62)=0;
-a=a(results.Index);
-plot(a);
-hold on;
-plot(results.U);
-  
+    ii=find(index==1);
+    scatter3(Data.mesh(ii,1),Data.mesh(ii,2),Data.mesh(ii,3),6,Data.U{j}(ii,1),'filled')
+    axis equal;
+    view(0,90);
+    title(['case=' num2str(caseN) '  Ucritical=' num2str(Ucritical) ' time=' num2str(Data.time(timeIndex))])
+    colormap jet;
+    colorbar;
+    pause();
+ end
+ 
+ 
+ 
+ 
+ 
