@@ -8,9 +8,9 @@ cd (MainPath);
  
  
  
-MeanmagU=zeros(1,62);
-MeanUx=zeros(1,62);
-for i=[103]
+MeanmagU=zeros(1,110);
+MeanUx=zeros(1,110);
+for i=[1:110]
     caseN=i
     Data={};
     cd (MainPath);
@@ -19,7 +19,7 @@ for i=[103]
     %% Find the examine box.
     radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
     leftPoint=min(Data.mesh(:,1));
-    box=find(Data.mesh(:,1)<leftPoint+2*radius);
+    box=find(Data.mesh(:,1)<leftPoint+1*radius);
     Data.mesh=Data.mesh(box,:);
     Data.vof=Data.vof(box,:);
     magUS=[];

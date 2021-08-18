@@ -57,12 +57,7 @@ hold on;
 plot(t,N,'o-')
 xlabel ('time (min)')
 gradient=diff(N)./diff(t);
-figure;
-plot (t(2:end),gradient);
-xlabel ('time (min)')
-ylabel ('growthRate (g/L/s')
-
-
+plot
 % umax=6.617127007498877e-4;
 % K =0.412181217307836;
 % normalizationFactor=1.252819519042969;
