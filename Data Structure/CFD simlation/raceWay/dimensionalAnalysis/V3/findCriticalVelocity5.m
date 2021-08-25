@@ -6,7 +6,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
 criticalU3=[];
-for i=[1:110]
+for i=[118]
     caseN=i
     Data={};
     cd (MainPath);
@@ -73,7 +73,7 @@ Data.mesh(:,3)=Data.count;
 
 [A, index] = sortrows(Data.mesh(i,:),[1 2]); % removing overlapping points
 if (size(A,1)<10)
-    difference=4;
+    difference=5;
     fprintf("Tried %0.8f and got %0.8f\n",Ucritical,difference);
     return;
 end
@@ -161,7 +161,7 @@ plot([5*r;5*r],[0;r],'b','LineWidth',2);
 criticalDistance=(xMesh(i)-min(Data.mesh(:,1)))/radius;
 hold off;
 title(['criticalDistance=' num2str(criticalDistance,'%10.2f') '*Radius']);
-difference=(3-criticalDistance);
+difference=(5-criticalDistance);
 
 saveas(gcf,['C:\Users\chenshen.ETS01297\Desktop\temp\k\k\case18_' num2str(Ucritical) '.png'])
 

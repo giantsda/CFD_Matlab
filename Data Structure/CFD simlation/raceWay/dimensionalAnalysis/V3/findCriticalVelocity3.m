@@ -5,8 +5,8 @@ oPath=pwd();
 MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
-criticalU4=[];
-for i=[118]
+criticalU3=[];
+for i=[111:118]
     caseN=i
     Data={};
     cd (MainPath);
@@ -40,8 +40,8 @@ for i=[118]
     
     criticalDistance = bisection2(@getcriticalLength,0,0.5,0.00025,Data,critcal);
     
-    criticalU4(caseN)=criticalDistance
-    saveas(gcf,['D:\CFD_second_HHD\02212020\130\Data\CriticalU4_' num2str(caseN) '.png'])
+    criticalU3(caseN)=criticalDistance
+    saveas(gcf,['D:\CFD_second_HHD\02212020\130\Data\CriticalU3_' num2str(caseN) '.png'])
 end
 cd(oPath);
 
@@ -157,11 +157,11 @@ else
 end
  
 plot([0; i] ,[floor(r/2); floor(r/2)],'b','LineWidth',2);
-plot([4*r;4*r],[0;r],'b','LineWidth',2);
+plot([5*r;5*r],[0;r],'b','LineWidth',2);
 criticalDistance=(xMesh(i)-min(Data.mesh(:,1)))/radius;
 hold off;
 title(['criticalDistance=' num2str(criticalDistance,'%10.2f') '*Radius']);
-difference=(4-criticalDistance);
+difference=(3-criticalDistance);
 
 saveas(gcf,['C:\Users\chenshen.ETS01297\Desktop\temp\k\k\case18_' num2str(Ucritical) '.png'])
 

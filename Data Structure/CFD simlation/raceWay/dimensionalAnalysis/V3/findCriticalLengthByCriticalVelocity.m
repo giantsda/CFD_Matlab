@@ -8,7 +8,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data\';
 cd (MainPath);
 results={};
 
-for i=[103]
+for i=[111:118]
     caseN=i
     Data={};
     cd (MainPath);
@@ -116,5 +116,6 @@ end
 
 cd(oPath);
 
-
+load handel.mat;
+soundsc(y, 2*Fs);
 
