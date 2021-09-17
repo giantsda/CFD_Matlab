@@ -6,7 +6,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
 criticalU4=[];
-for i=[103]
+for i=[107]
     caseN=i
     Data={};
     cd (MainPath);
@@ -27,5 +27,6 @@ for i=[103]
 end
 
 
-
-   
+load handel.mat;
+soundsc(y, Fs*3);
+cd(oPath);

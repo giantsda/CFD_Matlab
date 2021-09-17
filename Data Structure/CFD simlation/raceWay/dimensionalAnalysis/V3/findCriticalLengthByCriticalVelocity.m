@@ -8,7 +8,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data\';
 cd (MainPath);
 results={};
 
-for i=[111:118]
+for i=[119:134 143:174]
     caseN=i
     Data={};
     cd (MainPath);

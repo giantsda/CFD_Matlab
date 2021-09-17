@@ -1,3 +1,9 @@
+lightIntensity =[ 0, 250, 375, 500, 625, 750, 1000, 1250, 1500, 2000 ];
+growthRate= [ 0, 210, 290, 350, 400, 420, 450, 460, 460, 460 ];  
+  
+cftool(lightIntensity ,growthRate);
+
+
 subplot(3,1,1);
 %% Monod
 umax=2.29/24;

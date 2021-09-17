@@ -6,7 +6,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
 criticalU3=[];
-for i=[111:118]
+for i=[119:134 143:174]
     caseN=i
     Data={};
     cd (MainPath);
@@ -43,7 +43,11 @@ for i=[111:118]
     criticalU3(caseN)=criticalDistance
     saveas(gcf,['D:\CFD_second_HHD\02212020\130\Data\CriticalU3_' num2str(caseN) '.png'])
 end
+ 
 cd(oPath);
+
+load handel.mat;
+soundsc(y, 2*Fs);
 
 % clearvars -except UcriticalStore MainPath
 % save([MainPath '/UcriticalStore.mat'], '-v7.3');

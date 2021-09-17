@@ -6,7 +6,7 @@ opath=pwd();
 cd (MainPath);
 criticalU4=[];
 
-for i=[215]
+for i=[213:215]
     ii=1;
     caseN=i
     Data={};
@@ -15,36 +15,37 @@ for i=[215]
     fprintf("Done with reading data.\n");
     
     %% determin critical distance between mesh points
-    [A, index] = sortrows(Data.mesh(:,1:2),[1 2]); % removing overlapping points
-    B=A(1,:);
-    for i=2:length(A)
-        if  A(i,1)-A(i-1,1)<=0.001&&A(i,2)-A(i-1,2)<=0.001
-            
-        else
-            B=[B;A(i,:)];
-        end
-    end
+    %     [A, index] = sortrows(Data.mesh(:,1:2),[1 2]); % removing overlapping points
+    %     B=A(1,:);
+    %     for i=2:length(A)
+    %         if  A(i,1)-A(i-1,1)<=0.001&&A(i,2)-A(i-1,2)<=0.001
+    %
+    %         else
+    %             B=[B;A(i,:)];
+    %         end
+    %     end
+    %
+    %     B=sortrows(B,[1 2]);
+    %     C=B(1:200,:);% exaime a the first 100 poins.since they are sorted, they are at close region.
+    %     D=[];
+    %     E=[];
+    %     for i=1:200
+    %         for j=1:200
+    %             D(j)=norm(B(i,1:2)-B(j,1:2));
+    %         end
+    %         D(find(D==0))=[];
+    %         E(i)=min(D);
+    %     end
+    %     meanMeshDistance=mean(E);
+    %     critcal=meanMeshDistance*1.5;
     
-    B=sortrows(B,[1 2]);
-    C=B(1:200,:);% exaime a the first 100 poins.since they are sorted, they are at close region.
-    D=[];
-    E=[];
-    for i=1:200
-        for j=1:200
-            D(j)=norm(B(i,1:2)-B(j,1:2));
-        end
-        D(find(D==0))=[];
-        E(i)=min(D);
-    end
-    meanMeshDistance=mean(E);
-    critcal=meanMeshDistance*1.5;
-    
-    
+    critcal=0.01074674;
     radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
     leftPoint=min(Data.mesh(:,1));
     %% get Data.count
     if ismember(caseN,[213:218])
-        UcriticalS= 0.18:-0.02:0.10;
+        %         UcriticalS= 0.18:-0.02:0.10;
+        UcriticalS= [0.12 0.16 0.18];
     else
         UcriticalS= 0.15;
     end
@@ -84,7 +85,7 @@ for i=[215]
         xmax=max(Data.mesh(:,1));
         ymin=min(Data.mesh(:,2));
         ymax=max(Data.mesh(:,2));
-        yresolution=50;
+        yresolution=80;
         yMesh=linspace(ymin,ymax,yresolution);
         dy=(ymax-ymin)/yresolution;
         xMesh= xmin:dy:xmax;
@@ -92,7 +93,7 @@ for i=[215]
         %% convert scatter plot to grid plot
         D=[];
         originX=leftPoint+radius;
-        E=[];
+        E=zeros(length(xMesh),length(yMesh));
         for i=1:length(xMesh)
             i/length(xMesh)*100
             xx=xMesh(i);
@@ -105,10 +106,10 @@ for i=[215]
                     D(i,j)=255;
                     E(i,j)=255;
                 end
-                if ((xx-originX)^2+yy^2>=radius^2 && xx<=originX)
-                    E(i,j)=100;
-                    E(length(xMesh)-i+1,j)=100;
-                end
+                %                 if ((xx-originX)^2+yy^2>=radius^2 && xx<=originX)
+                %                     E(i,j)=255;
+                %                     E(length(xMesh)-i+1,j)=255;
+                %                 end
             end
         end
         
@@ -119,13 +120,17 @@ for i=[215]
         Perimeter = cat(1,stats.Perimeter);
         [~, n]=max(Area);
         if ismember(caseN,[213:226])
-            while Centroid(n,2)<300
-                Area(n)=0;
-                [~, n]=max(Area);
+            for i=1:length(Area)
+                if Centroid(n,2)<length(xMesh)/2.5
+                    Area(n)=0;
+                    [~, n]=max(Area);
+                end
             end
         else
             [~, n]=max(Area);
         end
+        E([1 end],:)=255;
+        E(:,[1 end])=255;
         imshow(rot90(1-E),[]);
         axis equal;
         hold on;
@@ -172,7 +177,7 @@ for i=[215]
                 turnerEnd=0.16;
         end
         
-        [~,index]=min(abs(xMesh-turnerEnd))
+        [~,index]=min(abs(xMesh-turnerEnd));
         plot([index; i] ,[floor(r/2); floor(r/2)],'b','LineWidth',2);
         plot([index;index],[0;r],'b','LineWidth',2);
         criticalDistance=(xMesh(i)-xMesh(index))/radius;
@@ -181,9 +186,10 @@ for i=[215]
         
         criticalLength{caseN}(ii,1)=Ucritical;
         criticalLength{caseN}(ii,2)=criticalDistance;
-        saveas(gcf,['D:\CFD_second_HHD\06232021\204\Data\Case_' num2str(caseN) '_Ucritical=' num2str(Ucritical) '.png'])
+        print(gcf,['D:\CFD_second_HHD\06232021\204\Data\Case_' num2str(caseN) '_Ucritical=' num2str(Ucritical) '.png'],'-dpng','-r800');
+        %         saveas(gcf,['D:\CFD_second_HHD\06232021\204\Data\Case_' num2str(caseN) '_Ucritical=' num2str(Ucritical) '.png'])
         ii=ii+1;
-    end 
+    end
     
 end
 cd (opath)

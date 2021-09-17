@@ -5,8 +5,8 @@ oPath=pwd();
 MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
-criticalU3=[];
-for i=[118]
+criticalU5=[];
+for i=[163:174]
     caseN=i
     Data={};
     cd (MainPath);
@@ -40,10 +40,13 @@ for i=[118]
     
     criticalDistance = bisection2(@getcriticalLength,0,0.5,0.00025,Data,critcal);
     
-    criticalU3(caseN)=criticalDistance
+    criticalU5(caseN)=criticalDistance
     saveas(gcf,['D:\CFD_second_HHD\02212020\130\Data\CriticalU3_' num2str(caseN) '.png'])
 end
 cd(oPath);
+load handel.mat;
+soundsc(y, 2*Fs);
+
 
 % clearvars -except UcriticalStore MainPath
 % save([MainPath '/UcriticalStore.mat'], '-v7.3');

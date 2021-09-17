@@ -7,7 +7,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 % fid=fopen('130UcriticalResultsV2.txt','a');
 UcriticalStore={};
-for i=[111:118]
+for i=[119:134 143:174]
     caseN=i
      Data={};
     cd (MainPath);
@@ -56,7 +56,8 @@ end
 plot(a,'*-');
 hold on;
 % plot(results.U);
- 
+ load handel.mat;
+soundsc(y, 2*Fs);
 cd (oPath);
 
 % plot (b)

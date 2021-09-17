@@ -10,7 +10,7 @@ cd (MainPath);
  
 MeanmagU=zeros(1,200);
 MeanUx=zeros(1,200);
-for i=[111:118]
+for i=[103]
     caseN=i
     Data={};
     cd (MainPath);
@@ -35,7 +35,8 @@ for i=[111:118]
  
     plot(Data.time,MeanmagUS);
  
-    MeanmagU(caseN)=mean(MeanmagUS);
+    MeanmagU(caseN)=mean(MeanmagUS)
+%     mean(MeanmagUS)
     title(['case=' num2str(caseN) ' MeanmagU=' num2str(mean(MeanmagUS)) ]);
     saveas(gcf,['D:\CFD_second_HHD\02212020\130\Data\MeanmagU_' num2str(i) '.png'])
     
@@ -58,3 +59,5 @@ axis equal;
 colormap jet;
 colorbar
 
+load handel.mat;
+soundsc(y, 2*Fs);
