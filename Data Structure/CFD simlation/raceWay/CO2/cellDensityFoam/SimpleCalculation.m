@@ -12,14 +12,15 @@ results=[0.00400000000000000,0.00800000000000000,0.0120000000000000,0.0160000000
 
 
 
-maxLightIntensity = 1500;
+maxLightIntensity = 689.5;
 depth=linspace(0,0.15,100000); %m
 
 
-Biomass=1;
+Biomass=0.79;
 
 DecayConstant=133.4.*Biomass+0.008346;
 I = 1./ exp(DecayConstant.*(depth)) *maxLightIntensity; 
+mean(I)
 lightAbsorb=trapz(depth,I)*Biomass;
 plot(depth,I)
 lightAbsorb
@@ -41,7 +42,7 @@ plot(t,N,'o-')
 function r=growth(t,N)
 global   results lightAbsorb Biomass;
 r=interp1(Biomass,lightAbsorb,N);
-r=r*0.55*1e-5*N;
+r=r*1.15*1e-5*N;
 end
 
 

@@ -1,0 +1,32 @@
+% load('/home/chen/Desktop/project/242/particle_1.mat')
+% 
+% for i=1:500
+%     p=particle{i};
+%     plot3(p(:,3),p(:,5),p(:,4));
+%     hold on;
+%     pause(0)
+% end
+% axis equal;
+
+
+
+% for i=1:56
+%         fprintf("cd %d \n openClean \n cd .. \n",i);
+% end
+
+
+% for i=1:56
+%         fprintf("mpirun -np 35 ./mpiMapFields.py ./%d ../%d \n",i ,i+62);
+% end
+
+
+% for i=1:56
+%         fprintf("/lustre/eaglefs/projects/co2cfd/running/icoUncoupledKinematicParcelFoam/icoUncoupledKinematicParcelFoam -case /lustre/eaglefs/projects/co2cfd/running/130/242/%d \n",i );
+% end
+
+
+for i=1:56
+        fprintf("/lustre/eaglefs/projects/co2cfd/running/icoUncoupledKinematicParcelFoam/icoUncoupledKinematicParcelFoam -case /lustre/eaglefs/projects/co2cfd/running/130/242/%d \n",i );
+end
+
+

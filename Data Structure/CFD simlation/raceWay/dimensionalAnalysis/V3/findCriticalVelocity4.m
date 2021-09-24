@@ -1,12 +1,17 @@
 % the criticalU4 is define as the critical vertical velocity so that the
 % critical length is 4*R
+figure;
+set(gcf,'outerposition',get(0,'screensize'));
 
+
+
+global caseN
 oPath=pwd();
 MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
 criticalU4=[];
-for i=[119:134 143:174]
+for i=[1:56]
     caseN=i
     Data={};
     cd (MainPath);
@@ -46,8 +51,8 @@ end
  
 cd(oPath);
 
-load handel.mat;
-soundsc(y, 2*Fs);
+% load handel.mat;
+% soundsc(y, 2*Fs);
 
 % clearvars -except UcriticalStore MainPath
 % save([MainPath '/UcriticalStore.mat'], '-v7.3');
@@ -58,11 +63,11 @@ soundsc(y, 2*Fs);
 
 
 function difference=getcriticalLength(Ucritical,Data,critcal)
-
+global caseN
 radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
 leftPoint=min(Data.mesh(:,1));
 %% get Data.count
-
+% Ucritical=0.0518790195
 Data.count=zeros(length(Data.vof),1);
 for c=1:length(Data.U)
     Data.count(abs(Data.U{c}(:,3))>Ucritical)=1;
@@ -167,7 +172,9 @@ hold off;
 title(['criticalDistance=' num2str(criticalDistance,'%10.2f') '*Radius']);
 difference=(4-criticalDistance);
 
-saveas(gcf,['C:\Users\chenshen.ETS01297\Desktop\temp\k\k\case18_' num2str(Ucritical) '.png'])
+print(gcf,['D:\CFD_second_HHD\02212020\130\Data\' num2str(caseN) '_4R.png'],'-dpng','-r800');
+       
+% saveas(gcf,['C:\Users\chenshen.ETS01297\Desktop\temp\k\k\case18_' num2str(Ucritical) '.png'])
 
 fprintf("Tried %0.8f and got %0.8f\n",Ucritical,difference);
 end

@@ -1,7 +1,10 @@
-% Data=MatlabImportToolpaste6944174801102543532tmp;
-i=6;
-plot(Data(:,i));
-hold on;
-plot(Data(:,i+9));
-plot(Data(:,i+18));
+filePath='C:\Users\chenshen.ETS01297\Desktop\18_4R'
  
+
+for i=1:2
+   filename=[filePath num2str(i) '.png']
+   a=imread(filename);
+   imshow(a);
+   b=a(2465:3561,2800:13140,:);
+   imwrite(b,[filePath num2str(i) 'b.png'])
+end
