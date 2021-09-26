@@ -6,7 +6,7 @@ opath=pwd();
 cd (MainPath);
 criticalU4=[];
 
-for i=[213]%:218]
+for i=[227]%:218]
     ii=1;
     caseN=i
     Data={};
@@ -43,7 +43,7 @@ for i=[213]%:218]
     radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
     leftPoint=min(Data.mesh(:,1));
     %% get Data.count
-    if ismember(caseN,[213:218])
+    if ismember(caseN,[213:218 227])
         %         UcriticalS= 0.18:-0.02:0.10;
         UcriticalS= [0.18];
     else
@@ -172,6 +172,8 @@ for i=[213]%:218]
                 turnerEnd=2.33; %location of the outlet
             case 218
                 turnerEnd=2.38;
+            case 227
+                turnerEnd=2.38;
             otherwise
                 turnerEnd=0.16;
         end
@@ -185,7 +187,7 @@ for i=[213]%:218]
         
         criticalLength{caseN}(ii,1)=Ucritical;
         criticalLength{caseN}(ii,2)=criticalDistance;
-        print(gcf,['D:\CFD_second_HHD\06232021\204\Data\Case_' num2str(caseN) '_Ucritical=' num2str(Ucritical) '.png'],'-dpng','-r800');
+%         print(gcf,['D:\CFD_second_HHD\06232021\204\Data\Case_' num2str(caseN) '_Ucritical=' num2str(Ucritical) '.png'],'-dpng','-r800');
         %         saveas(gcf,['D:\CFD_second_HHD\06232021\204\Data\Case_' num2str(caseN) '_Ucritical=' num2str(Ucritical) '.png'])
         ii=ii+1;
     end

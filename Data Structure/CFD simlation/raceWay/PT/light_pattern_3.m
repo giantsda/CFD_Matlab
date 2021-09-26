@@ -2,8 +2,8 @@
 % %% result will be calculated form the light intensity history.
 % I believe it first introduce a light intensity function and then use
 % findpeaks to find all local peaks with that meets some requirements.
+ 
 
-a=0.058;
 interval=zeros(1,2000000);
 i=1;
 for e=1:number

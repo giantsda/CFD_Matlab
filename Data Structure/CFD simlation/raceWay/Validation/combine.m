@@ -5,7 +5,7 @@ shading interp;
 axis equal;
 axis tight;
 colormap parula
-% colorbar
+colorbar
 hold on;
 scatter(reshape(y1,1,[]),reshape(z1,1,[]),'*')
 
