@@ -6,7 +6,7 @@ MainPath='D:\CFD_second_HHD\02212020\130';
 cd (MainPath);
 % fid=fopen('130UcriticalResultsV2.txt','a');
 UcriticalStore={};
-for i=[1:62]
+for i=[41]
     caseN=i
     Data={};
     cd (MainPath);
@@ -16,7 +16,7 @@ for i=[1:62]
     %% Find the examine box.
     radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
     leftPoint=min(Data.mesh(:,1));
-    box=find(Data.mesh(:,1)<leftPoint+2*radius);
+    box=find(Data.mesh(:,1)<leftPoint+1*radius);
     Data.mesh=Data.mesh(box,:);
     Data.vof=Data.vof(box,:);
     for n=1:length(Data.U)

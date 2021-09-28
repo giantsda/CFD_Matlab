@@ -4,7 +4,7 @@ oPath=pwd();
 path='D:\CFD_second_HHD\07162021\242\242\800s'
 cd(path);
 Data=[];
-for caseI=1:56
+for caseI=40
     load(['particle_' num2str(caseI) '.mat']);  
     ['particle_' num2str(caseI) '.mat']
     interval=zeros(1,2000000);

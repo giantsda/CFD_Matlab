@@ -4,15 +4,14 @@
 
 oPath=pwd();
 
-path='D:\CFD_second_HHD\07162021\242\242'
+path='D:\CFD_second_HHD\07162021\242\242\800s'
 cd(path);
 
-Safe={};
+results={};
 
-
-for caseI=1:56
+for caseI=[1:40 49:56]
     load(['particle_' num2str(caseI) '.mat']);
-    particle=Data.paritlce;
+    particle=Data.particle;
     number=Data.number;
     waterDepth=Data.waterDepth;
     
@@ -27,11 +26,11 @@ for caseI=1:56
     
     
     for e=1:number
-        %     if e==2126
-        %         e
-        %     end
+        if mod(e,floor(number/100))==0
+            fprintf("%d Percent\n",floor(e/floor(number/100)));
+        end
         if ~ isempty(particle{e})
-            fprintf('calculating %0.2f %% \n', e/number*100);
+             
             y_pos=particle{e}(:,5);
             y_pos=waterDepth-y_pos;
             
@@ -89,9 +88,9 @@ for caseI=1:56
         DurationSCombine=vertcat(DurationS{:});
         peakSCombine=vertcat(peakS{:});
         
-        Safe{caseI}.intervalSCombine=intervalSCombine;
-        Safe{caseI}.DurationSCombine=DurationSCombine;
-        Safe{caseI}.peakSCombine=peakSCombine;
+        results{caseI}.intervalSCombine=intervalSCombine;
+        results{caseI}.DurationSCombine=DurationSCombine;
+        results{caseI}.peakSCombine=peakSCombine;
     end
     %
     %     subplot(3,1,1);

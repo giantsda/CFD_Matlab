@@ -3,18 +3,17 @@
 % % I believe it first introduce a light intensity function and then use
 % % findpeaks to find all local peaks with that meets some requirements.
 oPath=pwd();
-path='D:\CFD_second_HHD\07162021\242\242\safe'
+path='/lustre/eaglefs/projects/co2cfd/running/130/242'
 cd(path);
 
 figure;
 set(gcf, 'Position', get(0, 'Screensize'));
 
-
 result={};
 
-for caseI=33:40
+for caseI=1
     load(['particle_' num2str(caseI) '.mat']);
-    particle=Data.paritlce;
+    particle=Data.particle;
     number=Data.number;
     waterDepth=Data.waterDepth;
     
@@ -49,26 +48,20 @@ for caseI=33:40
     dy=(yMax-yMin)/yresolution;
     xMesh= xMin:dy:xMax;
     
-    LDLocation=[];
+    LDLocation=zeros(100000000,2);
+    k=1;
     for e=1:number
+        if mod(e,floor(number/100))==0
+            fprintf("%d Percent\n",floor(e/floor(number/100)));
+        end
         if ~isempty(particle{e})
-            x_pos=particle{e}(:,3);
-            y_pos=particle{e}(:,4);
-            z_pos=particle{e}(:,5);
-            z_pos=waterDepth-z_pos;
-            time=particle{e}(:,1);
-            
+            z_pos=waterDepth-particle{e}(:,5);
             light_history=1./exp(40*(z_pos)) *500;
-            
-            [pks,locs] = findpeaks(light_history,'MinPeakHeight',100,'MinPeakProminence',80);
-            
-            
+            %         [pks,locs] = findpeaks(light_history,'MinPeakHeight',100,'MinPeakProminence',80);
             above=find(light_history>=100);
-            out=zeros(length(above),7);
-            
+            out=zeros(length(above),4);
             if ~isempty(out)
-                
-                plot(light_history)
+                %             plot(light_history)
                 j=1;
                 for i=2:length(above)
                     if above(i,1)-above(i-1,1)~=1
@@ -79,12 +72,16 @@ for caseI=33:40
                 out(j:end,:)=[];
                 out(:,2)= [(out(2:end,1)-1); length(above)];
                 out(:,3:4)=above(out(:,1:2));
-                LDLocation=[LDLocation;[x_pos(out(:,3)) y_pos(out(:,3))]];
-                
+                len=size(out,1)*2;
+                LDLocation(k:k+len-1,:)=[[particle{e}(out(:,3),3) particle{e}(out(:,3),4)];[particle{e}(out(:,4),3) particle{e}(out(:,4),4)]]; %  preallocation
+                k=k+len;
             end
         end
     end
-    %     scatter(LDLocation(:,1),LDLocation(:,2),3);
+    
+    LDLocation(k:end,:)=[];
+    %  scatter(LDLocation(:,1),LDLocation(:,2),1,'filled');
+    % axis equal
     D=zeros(length(xMesh),length(yMesh));
     
     
@@ -97,8 +94,6 @@ for caseI=33:40
             C(:,3)=sqrt(C(:,1).^2+C(:,2).^2);
             %             find(C(:,3)<dy/2)
             D(i,j)=D(i,j)+length(find(C(:,3)<dy/2));
-            
-            
         end
     end
     
@@ -107,7 +102,7 @@ for caseI=33:40
     %  D(D>floor(centers(end/2)))=floor(centers(end/2));
     
     clearvars -except X Y D caseI
-    save(['..\Figs\plot_' num2str(caseI) '.mat'], '-v7.3');
+    save(['./Figs/plot_' num2str(caseI) '.mat'], '-v7.3');
     
     D(D>10)=10;
     surf(X,Y,D.','edgecolor', 'none')
@@ -116,8 +111,7 @@ for caseI=33:40
     colorbar
     axis equal;
     view(0,90)
-    print(gcf,['..\Figs\plot_' num2str(caseI) '.png'],'-dpng','-r400');
-    
+    print(gcf,['./Figs/plot_' num2str(caseI) '.png'],'-dpng','-r400');
     
 end
 %

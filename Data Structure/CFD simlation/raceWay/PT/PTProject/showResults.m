@@ -4,7 +4,7 @@ global counts centers;
 meanInterva=[];
 mu=[];
 sigma=[];
-for caseI=[40:87]+8*0
+for caseI=[1:16] 
     caseI
     interval=result{caseI}.interval;
     interval((interval==0))=[];
@@ -29,9 +29,9 @@ for caseI=[40:87]+8*0
 %     hold on;
     
     
-%     [f,xi] = ksdensity(log(interval),linspace(-3,10,1000));
-%     plot(xi,f);
-%     hold on;
+    [f,xi] = ksdensity(log(interval),linspace(-3,10,1000));
+    plot(xi,f);
+    hold on;
     
     
  
@@ -46,20 +46,18 @@ for caseI=[40:87]+8*0
 %     plot(linspace(-3,10,1000),pdfEst)
        
 %     hold on
-        
-        
-        
+         
 %     hist(interval,200);
 %     xlabel("intevel(s)")
 %     ylabel("instances")
-    aa=log(interval);
-    hist(aa,200);
-    xlabel("log(intevel(s))")
-    ylabel("instances")
+%     aa=log(interval);
+%     hist(aa,200);
+%     xlabel("log(intevel(s))")
+%     ylabel("instances")
 %  
     title(['case ' num2str(caseI)])
-    hold off;
-    pause( )
+%     hold off;
+%     pause( )
 
     meanInterva(caseI)=mean(interval);
 end

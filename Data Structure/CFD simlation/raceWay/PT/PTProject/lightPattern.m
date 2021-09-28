@@ -3,37 +3,28 @@
 % I believe it first introduce a light intensity function and then use
 % findpeaks to find all local peaks with that meets some requirements.
 oPath=pwd();
-path='D:\CFD_second_HHD\07162021\242\242'
+path='D:\CFD_second_HHD\07162021\242\242\800s'
 cd(path);
- 
-% load('D:\CFD_second_HHD\07162021\242\242\allParticles.mat');
+  
 
 result={};
 
-for caseI=1:56
-    
+for caseI=[1:40 49:56]
+    caseI
     load(['particle_' num2str(caseI) '.mat']);
-    particle=Data.paritlce;
+    particle=Data.particle;
     number=Data.number;
     waterDepth=Data.waterDepth;
     
     interval=zeros(1,2000000);
     i=1;
-    
-    %% get maxY for liquid depth
-    p = randi([0,number],20,1);
-    posZ=[];
-    for i=1:length(p)
-        posZ=[posZ;particle{i}(:,5)];
-    end
-    [counts,centers] = hist(posZ,200);
-    counts=counts/sum(counts);
-    
+ 
     for e=1:number
-        %         e
+        if mod(e,floor(number/100))==0
+            fprintf("%d Percent\n",floor(e/floor(number/100)));
+        end
         
         if ~isempty (particle{e})
-            
             y_pos=particle{e}(:,5);
             y_pos=waterDepth-y_pos;
             time=particle{e}(:,1);
@@ -105,7 +96,7 @@ for caseI=1:56
     set(gca,'FontSize',20);
     
     interval(isnan(interval))=[];
-    mean(interval)
+    mean(interval);
     result{caseI}.interval=double(interval);
     
 end

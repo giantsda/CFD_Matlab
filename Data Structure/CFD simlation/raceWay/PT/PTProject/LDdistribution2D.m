@@ -11,13 +11,12 @@ set(gcf, 'Position', get(0, 'Screensize'));
 
 result={};
 
-for caseI=1
-        load(['particle_' num2str(caseI) '.mat']);
-        particle=Data.particle;
-        number=Data.number;
-        waterDepth=Data.waterDepth;
- 
-   
+for caseI=40
+    load(['particle_' num2str(caseI) '.mat']);
+    particle=Data.particle;
+    number=Data.number;
+    waterDepth=Data.waterDepth;
+    
     xMax=-Inf;
     xMin=Inf;
     yMax=-Inf;
@@ -55,31 +54,34 @@ for caseI=1
         if mod(e,floor(number/100))==0
             fprintf("%d Percent\n",floor(e/floor(number/100)));
         end
-        z_pos=waterDepth-particle{e}(:,5);
-        light_history=1./exp(40*(z_pos)) *500;
-        %         [pks,locs] = findpeaks(light_history,'MinPeakHeight',100,'MinPeakProminence',80);
-        above=find(light_history>=100);
-        out=zeros(length(above),4);
-        if ~isempty(out)
-            %             plot(light_history)
-            j=1;
-            for i=2:length(above)
-                if above(i,1)-above(i-1,1)~=1
-                    out(j,1)=i;
-                    j=j+1;
+        if ~isempty(particle{e})
+            z_pos=waterDepth-particle{e}(:,5);
+            light_history=1./exp(40*(z_pos)) *500;
+            %         [pks,locs] = findpeaks(light_history,'MinPeakHeight',100,'MinPeakProminence',80);
+            above=find(light_history>=100);
+            out=zeros(length(above),4);
+            if ~isempty(out)
+                %             plot(light_history)
+                j=1;
+                for i=2:length(above)
+                    if above(i,1)-above(i-1,1)~=1
+                        out(j,1)=i;
+                        j=j+1;
+                    end
                 end
+                out(j:end,:)=[];
+                out(:,2)= [(out(2:end,1)-1); length(above)];
+                out(:,3:4)=above(out(:,1:2));
+                len=size(out,1)*2;
+                LDLocation(k:k+len-1,:)=[[particle{e}(out(:,3),3) particle{e}(out(:,3),4)];[particle{e}(out(:,4),3) particle{e}(out(:,4),4)]]; %  preallocation
+                k=k+len;
             end
-            out(j:end,:)=[];
-            out(:,2)= [(out(2:end,1)-1); length(above)];
-            out(:,3:4)=above(out(:,1:2));
-            len=size(out,1)*2;
-            LDLocation(k:k+len-1,:)=[[particle{e}(out(:,3),3) particle{e}(out(:,3),4)];[particle{e}(out(:,4),3) particle{e}(out(:,4),4)]]; %  preallocation
-            k=k+len;
         end
     end
     
     LDLocation(k:end,:)=[];
-    %     scatter(LDLocation(:,1),LDLocation(:,2),3);
+    %  scatter(LDLocation(:,1),LDLocation(:,2),1,'filled');
+    % axis equal
     D=zeros(length(xMesh),length(yMesh));
     
     
@@ -102,7 +104,7 @@ for caseI=1
     clearvars -except X Y D caseI
     save(['..\Figs\plot_' num2str(caseI) '.mat'], '-v7.3');
     
-    D(D>10)=10;
+    D(D>30)=30;
     surf(X,Y,D.','edgecolor', 'none')
     
     colormap jet

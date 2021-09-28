@@ -1,5 +1,5 @@
 path='/lustre/eaglefs/projects/co2cfd/running/130/242/';
-    
+
 for caseI=1
     cd (path)
     cd (num2str(caseI))
@@ -67,21 +67,26 @@ for caseI=1
     for i=1:length(numFolders)
         time(i,1)=str2num(numFolders(i));
     end
-    particle=cell(1,length(time));
+    
+    if N>20000
+        N=20000;
+    end
+    
+    particle=cell(1,N);
     for i=1:N
         particle{i}(:,1)=time;
         for j=1:length(A)
             particle{i}(j,3:5)=A{j}(i,:);
         end
     end
-     
+    
     clearvars -except particle number path caseI
-
-    if length(particle)>20000
-        particle{20001:end}=[];
+    
+    number=length(particle);  % change double to single to save space and load time
+    for i=1:number
+        particle{i}=single(particle{i});
     end
     
-    number=length(particle);
     %% get maxY for liquid depth
     p = randi([1,number],50,1);
     posZ=[];
@@ -90,12 +95,12 @@ for caseI=1
     end
     [counts,centers] = hist(posZ,200);
     counts=counts/sum(counts);
-    waterDepth=centers(max(find(counts>=mean(counts))));  
-
+    waterDepth=centers(max(find(counts>=mean(counts))));
+    
     Data.particle=particle;
     Data.number=number;
     Data.waterDepth=waterDepth;
-
+    
     save(['../particle_' num2str(caseI) '.mat'],'Data','-v7.3');
 end
 
