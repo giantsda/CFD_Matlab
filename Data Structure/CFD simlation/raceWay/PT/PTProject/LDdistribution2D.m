@@ -11,7 +11,7 @@ set(gcf, 'Position', get(0, 'Screensize'));
 
 result={};
 
-for caseI=40
+for caseI=[  56]
     load(['particle_' num2str(caseI) '.mat']);
     particle=Data.particle;
     number=Data.number;
@@ -49,7 +49,9 @@ for caseI=40
     xMesh= xMin:dy:xMax;
     
     LDLocation=zeros(100000000,2);
+ 
     k=1;
+    n=0;
     for e=1:number
         if mod(e,floor(number/100))==0
             fprintf("%d Percent\n",floor(e/floor(number/100)));
@@ -76,9 +78,11 @@ for caseI=40
                 LDLocation(k:k+len-1,:)=[[particle{e}(out(:,3),3) particle{e}(out(:,3),4)];[particle{e}(out(:,4),3) particle{e}(out(:,4),4)]]; %  preallocation
                 k=k+len;
             end
+            n=n+1;
         end
     end
     
+    activeNumber=n;
     LDLocation(k:end,:)=[];
     %  scatter(LDLocation(:,1),LDLocation(:,2),1,'filled');
     % axis equal
@@ -101,7 +105,7 @@ for caseI=40
     [counts,centers] = hist(D,20);
     %  D(D>floor(centers(end/2)))=floor(centers(end/2));
     
-    clearvars -except X Y D caseI
+    clearvars -except X Y D caseI activeNumber
     save(['..\Figs\plot_' num2str(caseI) '.mat'], '-v7.3');
     
     D(D>30)=30;

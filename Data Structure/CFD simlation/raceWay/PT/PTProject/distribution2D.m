@@ -12,7 +12,7 @@ set(gcf, 'Position', get(0, 'Screensize'));
 result={};
 
 globalUpper=0;
-for caseI=[26:40 49:56]
+for caseI=[1:56]
     globalUpper=0.7559
     cd(path);
     caseI

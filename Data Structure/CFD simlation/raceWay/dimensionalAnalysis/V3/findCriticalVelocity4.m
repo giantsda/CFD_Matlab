@@ -11,7 +11,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
 criticalU4=[];
-for i=[1:56]
+for i=[18]
     caseN=i
     Data={};
     cd (MainPath);
@@ -46,7 +46,7 @@ for i=[1:56]
     criticalDistance = bisection2(@getcriticalLength,0,0.5,0.00025,Data,critcal);
     
     criticalU4(caseN)=criticalDistance
-    saveas(gcf,['D:\CFD_second_HHD\02212020\130\Data\CriticalU4_' num2str(caseN) '.png'])
+    print(gcf,['D:\CFD_second_HHD\02212020\130\Data\' num2str(caseN) '_4R.png'],'-dpng','-r800');
 end
  
 cd(oPath);
@@ -67,7 +67,7 @@ global caseN
 radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
 leftPoint=min(Data.mesh(:,1));
 %% get Data.count
-% Ucritical=0.0518790195
+% Ucritical=0.0520 
 Data.count=zeros(length(Data.vof),1);
 for c=1:length(Data.U)
     Data.count(abs(Data.U{c}(:,3))>Ucritical)=1;
@@ -172,7 +172,7 @@ hold off;
 title(['criticalDistance=' num2str(criticalDistance,'%10.2f') '*Radius']);
 difference=(4-criticalDistance);
 
-print(gcf,['D:\CFD_second_HHD\02212020\130\Data\' num2str(caseN) '_4R.png'],'-dpng','-r800');
+% print(gcf,['D:\CFD_second_HHD\02212020\130\Data\' num2str(caseN) '_4R.png'],'-dpng','-r800');
        
 % saveas(gcf,['C:\Users\chenshen.ETS01297\Desktop\temp\k\k\case18_' num2str(Ucritical) '.png'])
 
