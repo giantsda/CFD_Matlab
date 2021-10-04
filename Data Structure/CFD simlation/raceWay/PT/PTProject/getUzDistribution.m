@@ -10,7 +10,7 @@ fileName="C:\Users\chenshen.ETS01297\Desktop\temp\plot\PT\fig4.csv";
 x=linspace(0,0.3,1000).';
 write=[x];
 UzS={};
-for caseI=[1:40 49:56]
+for caseI=[25:32]
      
     Uz=[];
     cd (MainPath);
@@ -19,12 +19,12 @@ for caseI=[1:40 49:56]
     for i=1:length(Data.U)
         Uz{i}=Data.U{i}(:,3);
     end
-    Uz=abs(vertcat(Uz{:}));
+    Uz=vertcat(Uz{:});
 %     hist(Uz,1111)
 
     n=randi(length(Uz),200000,1);
     UZZZ=double(Uz(n));
-    UZZZ(UZZZ<0)=[];
+%     UZZZ(UZZZ<0)=[];
     UzS{caseI}=UZZZ;
 %     [f,xi] = ksdensity(UZZZ,x,'Support','positive','Bandwidth',0.2);
 %     plot(xi,f);

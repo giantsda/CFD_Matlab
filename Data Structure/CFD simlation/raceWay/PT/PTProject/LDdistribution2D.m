@@ -11,7 +11,7 @@ set(gcf, 'Position', get(0, 'Screensize'));
 
 result={};
 
-for caseI=[  56]
+for caseI=[  52]
     load(['particle_' num2str(caseI) '.mat']);
     particle=Data.particle;
     number=Data.number;
