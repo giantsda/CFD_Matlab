@@ -1,0 +1,17 @@
+pcolor(X,Y,D.');
+shading interp;
+axis equal
+colormap jet
+c=colorbar('eastoutside')
+axis equal;
+title(num2str(caseI));
+caxis([0 1]);
+axis off
+ 
+x1=get(gca,'position');
+x=get(c,'Position');
+x(3)=0.02;
+set(c,'Position',x)
+set(gca,'position',x1)
+print(gcf,['C:\Users\Chen\Documents\GitHub\Papers\PT\Figures\.png'],'-dpng','-r400');
+
