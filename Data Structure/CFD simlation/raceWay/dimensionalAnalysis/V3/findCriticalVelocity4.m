@@ -11,7 +11,7 @@ MainPath='D:\CFD_second_HHD\02212020\130\Data';
 cd (MainPath);
 
 criticalU4=[];
-for i=[18]
+for i=[3]
     caseN=i
     Data={};
     cd (MainPath);
@@ -67,7 +67,10 @@ global caseN
 radius=(max(Data.mesh(:,2))-min(Data.mesh(:,2)));
 leftPoint=min(Data.mesh(:,1));
 %% get Data.count
-% Ucritical=0.0520 
+Ucritical=0.04040527
+% Tried 0.04028320 and got -0.27999973
+% Tried 0.04040527 and got 0.90000010
+
 Data.count=zeros(length(Data.vof),1);
 for c=1:length(Data.U)
     Data.count(abs(Data.U{c}(:,3))>Ucritical)=1;
@@ -162,6 +165,12 @@ above=find(percentageS>=0.4);
 if isempty(above)
     i=1;
 else
+%     for j=2:length(above)
+%         if above(j)-above(j-1)~=1
+%             break;
+%         end
+%     end
+%     i=above(j-1);
     i=above(end);
 end
  
