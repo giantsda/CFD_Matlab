@@ -78,11 +78,10 @@ function r=growthLightandN(t,X,k1,k2,k3)
  
 global   results lightAbsorb Biomass;
 B=X(1);
-N=X(2);
-dB=(interp1(Biomass,lightAbsorb,B)*N*k1-k3)*B;
-dN=-k2*dB;
-r=[dB;dN];
+C=X(2);
+% k3=0;
+dB=(interp1(Biomass,lightAbsorb,B)*C*k1-k3)*B;
+dC=-k2*dB;
+r=[dB;dC];
 end
-
-
  

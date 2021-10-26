@@ -39,6 +39,8 @@ mea=mea(Index);
 Upoints=Upoints(Index); % max velocity at x=R cross section. Because meanMagU is hard to get without doing simulations, we mesuew Upoints and multiply it by 60%.
 UCritical4RO=UCritical4RO(Index);
 
+plot(UCritical3R,U,'*')
+
 % plot(UCritical4R);
 % hold on;
 % plot(UCritical4RO);

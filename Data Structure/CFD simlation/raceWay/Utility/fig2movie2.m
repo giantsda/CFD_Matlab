@@ -1,9 +1,11 @@
-path='/home/chen/Desktop/minipond';
+path='D:\CFD_second_HHD\Plot\Flow';
 frame_files = dir([ path '/*.png']);
 %% this file combine figs to generate a Movie by writeVideo
-v = VideoWriter('/home/chen/Desktop/minipond/mini.mp4','MPEG-4');
-v.FrameRate=8;
-% v.Quality = 75;
+v = VideoWriter('D:\CFD_second_HHD\Plot\Flow\video.mp4','MPEG-4');
+v.FrameRate=10;
+
+
+v.Quality = 100;
 open(v)
 begin=1;
 middle=1;
@@ -13,6 +15,8 @@ for i=begin:middle:length(frame_files)
     file_name = [path '\' frame_files(i).name];
 %     file_name=[path num2str(i) '.jpg'];
     frame=imread( file_name);
+    imshow(frame);
+    frame=frame(386:end,:,:);
 %     frame=imresize(frame,[1088 1920]);
     writeVideo(v, frame);
     fprintf('%0.2f %%\n',i/length(frame_files)*100);
