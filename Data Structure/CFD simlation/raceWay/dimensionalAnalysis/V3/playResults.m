@@ -96,8 +96,30 @@ cftool( U([1:8]+8*i), UCritical4R([1:8]+8*i));
 AR=[2,1,0.8,0.6,0.4,0.2,0.141891892];
 Dh=[ 0.224 0.24 0.307692308 0.381818182 0.448351648 0.571428571 0.654315789];
 Dh2R=2./(2+1./AR)
+Dh2R_squart=sqrt(Dh2R)
+Dh_Dh2R_squart=Dh.*Dh2R_squart;
 k=[ 0.8227 0.7609 0.7157 0.6598 0.619 0.4628 0.3846];
 % plot(Dh,k,'*-');
 hold on;
-plot(De,k,'*-');
-cftool(Dh2R,k)
+% plot(De,k,'*-');
+% cftool(Dh2R_squart,k)
+cftool(Dh_Dh2R_squart,k)
+
+
+%%
+x=linspace(0,2,10000);
+plot(Dh2R,k,'*');
+hold on;
+y1=(x.*1.482)./(x+0.6255);
+y2=0.9471.*x.^0.5429;
+plot(x,y1);
+plot(x,y2);
+legend('Data',"rational",'Power')
+
+
+
+
+
+
+
+
