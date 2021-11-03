@@ -9,7 +9,7 @@ frame_files = dir([ path '/*.png']);
  
 %% this file combine figs to generate a Movie by writeVideo
 v = VideoWriter('C:\Users\Chen\Desktop\Light.mp4','MPEG-4');
-v.FrameRate=6.5;
+v.FrameRate=6.5*1.25;
 v.Quality = 100;
 open(v)
 begin=1;
@@ -48,6 +48,7 @@ for i=1:2: (987)
     subplot(2,2,2);
     rectangle('Position',[0,0,5,10],'FaceColor',[1 1 1]*light_history1(i)/500,'EdgeColor','none','LineWidth',3)
     subtitle('Light environment');
+    axis off
     %%
     
     subplot(2,2,3);
@@ -60,10 +61,11 @@ for i=1:2: (987)
     xticks([0:10:60]);
     ylabel('Vertical position from bottom (m)');
     xlabel('Time (seconds)');
-    subtitle('Low media density(0.1 mg/L)');
+    subtitle('Low media density (0.1 mg/L)');
     subplot(2,2,4);
     rectangle('Position',[0,0,5,10],'FaceColor',[1 1 1]*light_history2(i)/500,'EdgeColor','none','LineWidth',3)
     subtitle('Light environment');
+    axis off
     pause(0)
     frame = getframe(gcf);
     writeVideo(v, frame);
