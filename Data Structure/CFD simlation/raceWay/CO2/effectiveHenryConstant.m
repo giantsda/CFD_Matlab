@@ -13,7 +13,7 @@ Pco2=0.00039212775; %bar
 % HCO2=0.0299; % mol/kg/bar at T=30+273 
 % Pco2=0.00039212775; %bar
 
-PH=2:0.05:14;
+PH=8:0.05:10;
 PH=9
 H=10.^(-PH);
 EffctiveHenryConstant=HCO2*(1+Kc1./H+Kc1*Kc2./H./H);

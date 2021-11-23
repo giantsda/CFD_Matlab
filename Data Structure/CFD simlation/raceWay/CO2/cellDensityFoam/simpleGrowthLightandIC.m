@@ -19,7 +19,7 @@ span=linspace(0,21000,10000);
 % plot(t,X(:,1),'ro-');
 % plot(t,X(:,2),'bo-');
 
-data=[data;14000 0.3929 ;15000 0.3929 ;18000 0.3929]
+data=[data;14000 0.3929 ;15000 0.3929 ;18000 0.3929];
 parameters0=[30.3021,0.0378,-4.4741e-05];
 options = optimset('PlotFcns','optimplotfval','TolX',1e-7);
 
