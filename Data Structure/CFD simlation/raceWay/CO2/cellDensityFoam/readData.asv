@@ -24,22 +24,22 @@ times=[];
 for i=4:length(files)
     file=files(i).name;
     if (~isempty(regexp(file(1:2) ,'[0-9][0-9]')) && isdir(file))
-        if (str2num(file)<200)
+%         if (str2num(file)>200)
             times=[times convertCharsToStrings(file)];
-        end
+%         end
     end
 end
- 
-fprintf("total %d data files detected.\n",length(times));
+N=length(times);
+fprintf(fid,"total %d data files detected.\n",N);
 %     N=2; %debug
- 
+for n=1:N
 % times=["102.487"];
 %% reading U Field
 for n=1:length(times)
     U=[];
     time=char(times(n));
 
-    Data.time{n}=time;
+    Data{n}.time=time;
     fprintf("reading data %s of case  \n",time );
     fpid = fopen([time '/U'], 'r');
     for i=1:20
@@ -61,11 +61,8 @@ for n=1:length(times)
     dec2hex(fread(fpid,2,'*int8'));
     waterDepth= fread(fpid,numberOfPoints,'*double');
     fclose(fpid);
-    waterDepth(find(waterDepth<0),:)=[];
-    Data.waterDepth{n}=waterDepth;
+    Data{n}.waterDepth=waterDepth;
 
-%     hist(waterDepth,100);
-%     pause();
 
 %     fpid = fopen([time '/consumptionRate'], 'r');
 %     for i=1:20
@@ -120,11 +117,6 @@ for n=1:length(times)
 
 
 end
-
-
-waterDepthS=vertcat(Data.waterDepth{:});
-[N,edges] = histcounts(waterDepthS);
-centers=edges(2:end)-(edges(2)-edges(1))/2
 
 % consumptionRate(find(waterDepth<0))=[];
 meshStore(find(waterDepth<0),:)=[];

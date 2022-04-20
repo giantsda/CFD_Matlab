@@ -121,17 +121,18 @@ for n=1:length(times)
 
 end
 
-
 waterDepthS=vertcat(Data.waterDepth{:});
-[N,edges] = histcounts(waterDepthS);
-centers=edges(2:end)-(edges(2)-edges(1))/2
+[N,edges] = histcounts(waterDepthS,2000);
+centers=edges(2:end)-(edges(2)-edges(1))/2;
 
-% consumptionRate(find(waterDepth<0))=[];
-meshStore(find(waterDepth<0),:)=[];
-waterDepth(find(waterDepth<0),:)=[];
-% scatter3(meshStore(:,1),meshStore(:,2),meshStore(:,3),30,consumptionRate,'filled')
-% hist(consumptionRate,100)
-% mean(consumptionRate)
+waterDepthDummy=[];
+for i=1:length(centers)
+    n=round(N(i)/1000);
+    for j=1:n
+        waterDepthDummy=[waterDepthDummy; centers(i)];
+    end
+end
+ 
 
 cellDensity=0.4
 lightIntensityDecayConstant=cellDensity * 133.4;

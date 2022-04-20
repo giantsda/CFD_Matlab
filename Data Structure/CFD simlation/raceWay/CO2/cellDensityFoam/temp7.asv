@@ -1,0 +1,11 @@
+xq=linspace(0,7)
+vq2 = interp1(a,b,xq,'spline');
+plot(x,v,'o',xq,vq2,':.');
+xlim([0 2*pi]);
+title('Spline Interpolation');
+
+
+
+
+
+
