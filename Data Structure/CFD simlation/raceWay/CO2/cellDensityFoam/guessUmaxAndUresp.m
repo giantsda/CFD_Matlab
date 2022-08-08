@@ -18,8 +18,8 @@ N0=0.066;
 [t,N] = ode15s(@ode1, span, N0,[],uMax,uRes);
 plot(data(:,1),data(:,2),'*-');
 hold on;
-plot(t,N)
-% plot(A(:,1),A(:,2),'o-')
+% plot(t,N)
+plot(A(:,1),A(:,2),'o-')
 rate=diff(N)./diff(t);
 
 
